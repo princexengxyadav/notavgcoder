@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>notavgcoder</title>
+  <meta name="description" content="Free notes, courses and practice links for every subject, sorted in one place.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+
+  <!-- Runs first so dark mode is applied before the page is drawn -->
+  <script src="theme.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="home">
+
+  <header class="site-header">
+    <a class="logo" href="index.html">notavgcoder</a>
+    <button class="btn" id="theme-toggle" type="button">Dark mode</button>
+  </header>
+
+  <main>
+    <h1>Free notes and courses for every subject.</h1>
+    <p class="intro">Pick a subject, or search for a topic like "Jacobian" or "pointers".</p>
+
+    <label class="visually-hidden" for="search">Search subjects and topics</label>
+    <input class="search-box" type="search" id="search" placeholder="Search subjects and topics (press / to jump here)" autocomplete="off">
+
+    <!-- JavaScript fills this list from data.js -->
+    <ul class="list-box" id="subject-list"></ul>
+    <p class="no-results" id="no-results" hidden>No subject matches that. Check the spelling or try a shorter word.</p>
+
+    <section class="saved" aria-labelledby="saved-heading">
+      <h2 id="saved-heading">Saved resources</h2>
+      <ul class="list-box" id="saved-list" hidden></ul>
+      <p class="empty" id="saved-empty">Nothing saved yet. Open a subject and press Save on any resource.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Made by a student, for students. Every resource belongs to its original authors, so please follow the link to read it on their site.</p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

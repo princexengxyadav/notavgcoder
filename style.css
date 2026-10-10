@@ -1,0 +1,331 @@
+/* =====================================================================
+   style.css
+   1. Colours (light and dark)   2. Reset   3. Header and footer
+   4. Buttons   5. Home page   6. Lists and rows   7. Subject page
+   8. Small screens
+   ===================================================================== */
+
+/* ---------- 1. Colours ---------- */
+:root {
+  --paper: #f6f8fc;      /* page background */
+  --grid: #dde5f1;       /* graph-paper lines */
+  --ink: #1b2a4a;        /* main text */
+  --muted: #55657f;      /* secondary text */
+  --pen: #2447d6;        /* links and highlights */
+  --on-pen: #ffffff;     /* text on top of the pen colour */
+  --line: #b9c5da;       /* thin borders */
+}
+
+/* Dark theme: theme.js sets data-theme="dark" on the <html> tag */
+:root[data-theme="dark"] {
+  --paper: #0f1626;
+  --grid: #1a2338;
+  --ink: #e6ebf5;
+  --muted: #9dabc6;
+  --pen: #86a6ff;
+  --on-pen: #0f1626;
+  --line: #2c3a56;
+}
+
+/* ---------- 2. Reset ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background-color: var(--paper);
+
+  /* Graph-paper effect: thin vertical and horizontal lines */
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 28px 28px;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--pen);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--pen);
+  outline-offset: 3px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- 3. Header and footer ---------- */
+.site-header,
+.site-footer,
+main {
+  width: 100%;
+  max-width: 44rem;
+  margin: 0 auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+main {
+  padding-top: 1.5rem;
+  padding-bottom: 3rem;
+}
+
+.site-footer {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  padding-bottom: 1.5rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.site-footer p {
+  margin: 0;
+  max-width: 60ch;
+}
+
+/* ---------- 4. Buttons ---------- */
+.btn {
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background: var(--pen);
+  color: var(--on-pen);
+  border-color: var(--pen);
+}
+
+/* A saved resource shows a filled button */
+.btn[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ---------- 5. Home page ---------- */
+h1 {
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.75rem;
+  max-width: 18ch;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 0.75rem;
+}
+
+.intro {
+  color: var(--muted);
+  margin: 0 0 1.75rem;
+  max-width: 55ch;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+  max-width: 60ch;
+}
+
+.search-box {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: 0;
+}
+
+.search-box::placeholder {
+  color: var(--muted);
+}
+
+.no-results,
+.empty {
+  margin: 1rem 0 0;
+  padding: 1rem 1.1rem;
+  background: var(--paper);
+  border: 1.5px dashed var(--muted);
+  color: var(--muted);
+}
+
+/* ---------- 6. Lists and rows ---------- */
+.list-box {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1.5px solid var(--ink);
+  background: var(--paper);   /* keeps text readable over the grid */
+}
+
+/* A line above every visible row that has a visible row before it.
+   This keeps the dividers correct while the search hides some rows. */
+.list-box > li:not([hidden]) ~ li:not([hidden]) {
+  border-top: 1px solid var(--line);
+}
+
+/* Subject rows on the home page */
+.subject-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.subject-text {
+  display: block;
+}
+
+.subject-name {
+  display: block;
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+
+.subject-description {
+  display: block;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.subject-meta {
+  color: var(--muted);
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.subject-link:hover,
+.subject-link:focus-visible {
+  background: var(--pen);
+  color: var(--on-pen);
+  outline-offset: -3px;
+}
+
+.subject-link:hover .subject-description,
+.subject-link:hover .subject-meta,
+.subject-link:focus-visible .subject-description,
+.subject-link:focus-visible .subject-meta {
+  color: var(--on-pen);
+}
+
+/* Resource rows (subject page and saved list) */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1.1rem;
+}
+
+.resource-info a {
+  font-weight: 600;
+}
+
+.resource-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.15rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.tag {
+  border: 1px solid var(--muted);
+  padding: 0 0.45rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* ---------- 7. Subject page ---------- */
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.unit {
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  padding: 1.1rem 1.25rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.unit h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.2rem;
+}
+
+.topics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+}
+
+.unit-resources {
+  margin-top: 1rem;
+}
+
+/* ---------- 8. Small screens ---------- */
+@media (max-width: 480px) {
+  .subject-link {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
